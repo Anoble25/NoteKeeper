@@ -3,7 +3,6 @@ package com.example.alex.notekeeper;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -38,14 +37,15 @@ public class NoteListActivity extends AppCompatActivity {
 
         List<NoteInfo> notes = DataManager.getInstance().getNotes();
         ArrayAdapter<NoteInfo> adapterNotes = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, notes);
+
         listNotes.setAdapter(adapterNotes);
 
         listNotes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Intent intent = new Intent(NoteListActivity.this, NoteActivity.class);
-                NoteInfo note = (NoteInfo) listNotes.getItemAtPosition(position);
-                intent.putExtra(NoteActivity.NOTE_INFO, note);
+                //NoteInfo note = (NoteInfo) listNotes.getItemAtPosition(position);
+                intent.putExtra(NoteActivity.NOTE_POSITION, position);
                 startActivity(intent);
             }
         });
