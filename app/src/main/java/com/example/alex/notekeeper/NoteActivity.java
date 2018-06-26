@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -128,16 +129,17 @@ public class NoteActivity extends AppCompatActivity {
     // gets position of the note and then sends it to the data manager
     private void readDisplayStateValues() {
         Intent intent = getIntent();
-        int position = intent.getIntExtra(NOTE_POSITION, POSITION_NOT_SET);
-        mIsNewNote = position == POSITION_NOT_SET;
+        mNotePosition = intent.getIntExtra(NOTE_POSITION, POSITION_NOT_SET);
+        mIsNewNote = mNotePosition == POSITION_NOT_SET;
         if (mIsNewNote){
             createNewNote();
         }
 
-        mNote = DataManager.getInstance().getNotes().get(position);
+        mNote = DataManager.getInstance().getNotes().get(mNotePosition);
 
 
     }
+
 
     private void createNewNote() {
         DataManager dm= DataManager.getInstance();
